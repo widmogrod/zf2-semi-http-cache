@@ -1,0 +1,34 @@
+{
+    "name": "widmogrod/zf2-http-cache",
+    "description": "ZF2 HTTP Cache",
+    "type": "library",
+    "keywords": [
+        "zf2",
+        "http",
+        "cache"
+    ],
+    "homepage": "https://github.com/widmogrod/zf2-http-cache",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Gabriel Habryn",
+            "email": "widomgrod+zf2-http-cache@gmail.com",
+            "role": "lead"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/widmogrod/zf2-http-cache/issues"
+    },
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "WidHttpCache": "src"
+        },
+        "classmap": ["src/WidHttpCache/Module.php"]
+    }
+}
