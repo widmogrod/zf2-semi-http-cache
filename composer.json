@@ -23,12 +23,12 @@
         "php": ">=5.4"
     },
     "require-dev": {
-        "phpunit": "dev-master"
+        "phpunit/phpunit": "3.7.*",
+        "zendframework/zendframework": "2.1.*"
     },
     "autoload": {
         "psr-0": {
             "WidHttpCache": "src"
-        },
-        "classmap": ["src/WidHttpCache/Module.php"]
+        }
     }
 }
