@@ -16,4 +16,4 @@ script:
  - ../vendor/bin/phpunit
 
 notifications:
-  email: "widmogrod+zf2-http-cache@gmail.com"
+  email: "widmogrod+zf2-semi-http-cache@gmail.com"
