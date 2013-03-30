@@ -72,7 +72,21 @@ class Config {
         return $this->mustRevalidate;
     }
 
-    public function merge() {
+    public function merge(array $data) {
+        foreach ($data as $name => $value) {
+            switch ($name) {
+                case 'max-age':
+                    $this->setMaxAge($value);
+                    break;
 
+                case 's-maxage':
+                    $this->setSMaxAge($value);
+                    break;
+
+                case 'must-revalidate':
+                    $this->setMustRevalidate($value);
+                    break;
+            }
+        }
     }
 }
