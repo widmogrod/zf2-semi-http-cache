@@ -1,6 +1,8 @@
 <?php
 return array(
     'zf2-semi-http-cache' => array(
+        'enabled' => true,
+        'useModifiedSince' => true,
         'default' => array(
             /**
              * https://www.varnish-software.com/static/book/VCL_Basics.html#the-initial-value-of-beresp-ttl
@@ -13,6 +15,16 @@ return array(
              */
             's-maxage' => 3600,  // 1h
             'max-age'  => 600,   // 10min in browser
+        ),
+
+        'configListener' => 'WidHttpCache\Listener\RoutesCacheConfigListener',
+    ),
+
+    'router' => array(
+        'routes' => array(
+            'application' => array(
+                'zf2-semi-http-cache' => array(),
+            ),
         ),
     ),
 );
