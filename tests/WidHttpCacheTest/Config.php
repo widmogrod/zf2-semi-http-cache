@@ -46,7 +46,7 @@ class Config extends \PHPUnit_Framework_TestCase {
 
     public function testEnabled() {
         $value = $this->object->isEnabled();
-        $this->assertFalse($value);s
+        $this->assertFalse($value);
 
         $expected = true;
         $this->object->setEnabled($expected);

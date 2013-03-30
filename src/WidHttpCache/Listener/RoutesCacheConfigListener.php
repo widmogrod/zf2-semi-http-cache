@@ -64,16 +64,16 @@ class RoutesCacheConfigListener implements ListenerAggregateInterface
         }
 
         $config = $e->getApplication()->getServiceManager()->get('Config');
-        if (!isset($config['router'], $config['routes'])) {
+        if (!isset($config['router'], $config['router']['routes'])) {
             return;
         }
 
-        $config = (array)$config['routes'];
+        $config = (array) $config['router']['routes'];
 
         $routeName = $routeMatch->getMatchedRouteName();
         if (false !== strpos($routeName, self::CHILD_ROUTE_TOKEN)) {
-            do {
-                $part = strtok($routeName, self::CHILD_ROUTE_TOKEN);
+            $part = strtok($routeName, self::CHILD_ROUTE_TOKEN);
+            while ($part !== false) {
                 if (isset($config[$part])) {
                     $config = (array)$config[$part];
                 } else if (isset($config['child_routes'], $config['child_routes'][$part])) {
@@ -81,9 +81,10 @@ class RoutesCacheConfigListener implements ListenerAggregateInterface
                 } else {
                     return;
                 }
-            } while ($part !== false);
+                $part = strtok(self::CHILD_ROUTE_TOKEN);
+            };
         } else if (isset($config[$routeName])) {
-            $config = (array)$config[$routeName];
+            $config = (array) $config[$routeName];
         } else {
             return;
         }
