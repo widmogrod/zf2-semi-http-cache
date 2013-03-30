@@ -1,6 +1,7 @@
 <?php
-namespace WidHttpCache;
+namespace WidHttpCache\Listener;
 
+use WidHttpCache\Config;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Http\Header\CacheControl;
