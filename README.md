@@ -7,8 +7,6 @@ This module is still in development phase.
 
 TBD
 
-### Why semi http cache and not full flagged?
-
 ### What issues it solves?
 - Wrong `Last-Modified` date when your application is running on Apache.
   This date in taken from index.php modification date which is not accurate
@@ -19,11 +17,11 @@ TBD
   - Reducing bandwidth. If browser has valid cached data then only 304 header is send.
   - Speed up response time, by omitting dispatch event if browser cache is not stale.
 - Providing out of the box `Cache-Control` management.
-- Providing more accurate Last-Modified date solution
+- Providing more accurate Last-Modified date solution (but not perfect).
 
 ### Why `semi` HTTP cache?
-Because things like `If-Modified-Since` are connected to `Cache-Control: max-age`
-and not to real modification date of requested entity.
+Because things like `If-Modified-Since` are calculated base of `Cache-Control: max-age`
+and not base to real modification date of requested entity.
 
 
 ## Installation
