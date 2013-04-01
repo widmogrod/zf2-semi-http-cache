@@ -17,7 +17,7 @@ class RoutesCacheConfigListener implements ListenerAggregateInterface
     /**
      * @var CallbackHandler[]
      */
-    protected $listeners = [];
+    protected $listeners = array();
 
     /**
      * @var Config

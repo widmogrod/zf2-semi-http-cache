@@ -1,7 +1,8 @@
 <?php
 namespace WidHttpCache;
 
-class Config {
+class Config
+{
     const CONFIG_NAMESPACE = 'zf2-semi-http-cache';
     const CONFIG_LISTENER = 'WidHttpCache\Listener\RoutesCacheConfigListener';
 
@@ -24,7 +25,7 @@ class Config {
 
     public function setEnabled($flag)
     {
-        $this->enabled = (bool) $flag;
+        $this->enabled = (bool)$flag;
     }
 
     public function isEnabled()
@@ -72,7 +73,8 @@ class Config {
         return $this->mustRevalidate;
     }
 
-    public function merge(array $data) {
+    public function merge(array $data)
+    {
         foreach ($data as $name => $value) {
             switch ($name) {
                 case 'max-age':
