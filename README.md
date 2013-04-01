@@ -7,7 +7,16 @@ This module is still in development phase.
 
 TBD
 
-- what issues it solves?
+### Why semi http cache and not full flagged?
+
+### What issues it solves?
+- Wrong Last-Modified date when your application is running on apache.
+  This date in Apache is index.php timestamp which is not accurate and can couse that browser will not cache response.
+
+### What benefits it brings?
+- handling If-Modified-Since & 304 Not Modified which:
+  - reducing bandwidth if not modified the response is only 304 header.
+  - speed up response time by omitting dispatch event if browser content is not stale.
 
 ## Installation
 
