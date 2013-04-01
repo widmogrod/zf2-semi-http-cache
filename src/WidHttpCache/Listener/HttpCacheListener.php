@@ -99,12 +99,11 @@ class HttpCacheListener implements ListenerAggregateInterface
 
     public function onFinish(MvcEvent $e)
     {
-        /** @var $request Request */
-        $request = $e->getRequest();
         /** @var $response Response */
         $response = $e->getResponse();
 
         $headers = $response->getHeaders();
+        /** @var $lastModified LastModified  */
         $lastModified = $headers->get('Last-Modified');
         if (!$lastModified instanceof LastModified) {
             $lastModified = new LastModified();

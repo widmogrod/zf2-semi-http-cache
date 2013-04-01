@@ -200,4 +200,59 @@ class HttpCacheListener extends \PHPUnit_Framework_TestCase {
             ),
         );
     }
+
+    /**
+     * @dataProvider getOnFinish
+     */
+    public function testonFinish($maxAge, $sMaxAge, $mustRevalidate) {
+        // prepare Last-Modified mock
+        {{
+            $lastModified = $this->getMockBuilder('Zend\Http\Header\LastModified')->disableOriginalConstructor()->getMock();
+        }}
+
+        // prepare headers mock
+        {{
+            $headers = $this->getMockBuilder('Zend\Http\Headers')->disableOriginalConstructor()->getMock();
+            $call = 0;
+            $headers->expects($this->at($call++))->method('get')->with($this->equalTo('Last-Modified'))->will($this->returnValue($lastModified));
+            $headers->expects($this->at($call++))->method('get')->with($this->equalTo('Cache-Control'))->will($this->returnValue(null));
+            $headers->expects($this->at($call++))->method('addHeader')->with($this->isInstanceOf('Zend\Http\Header\CacheControl'));
+        }}
+
+        // prepare response mock
+        {{
+            $response = $this->getMockBuilder('Zend\Http\Response')->disableOriginalConstructor()->getMock();
+            $call = 0;
+            $response->expects($this->at($call++))->method('getHeaders')->will($this->returnValue($headers));
+        }}
+
+        // prepare event mock
+        {{
+            $event = $this->getMockBuilder('Zend\Mvc\MvcEvent')->disableOriginalConstructor()->getMock();
+            $call = 0;
+            $event->expects($this->at($call++))->method('getResponse')->will($this->returnValue($response));
+        }}
+
+        // prepare config mock
+        {{
+            $config = $this->getMock('WidHttpCache\Config');
+            $config->expects($this->once())->method('getMaxAge')->will($this->returnValue($maxAge));
+            $config->expects($this->once())->method('getSMaxAge')->will($this->returnValue($maxAge));
+            $config->expects($this->once())->method('istMustRevalidate')->will($this->returnValue($maxAge));
+        }}
+
+        $object = new TestObject($config);
+        $resut = $object->onFinish($event);
+        $this->assertNull($resut);
+    }
+
+    public function getOnFinish() {
+        return array(
+            'equal to max age' => array(
+                '$maxAge' => 100,
+                '$sMaxAge' => 20,
+                '$mustRevalidate' => true,
+            ),
+        );
+    }
 }
