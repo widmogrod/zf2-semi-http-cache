@@ -17,7 +17,7 @@ TBD
   - Reducing bandwidth. If browser has valid cached data then only 304 header is send.
   - Speed up response time, by omitting dispatch event if browser cache is not stale.
 - Providing out of the box `Cache-Control` management.
-- Providing more accurate Last-Modified date solution (but not perfect).
+- Providing more accurate `Last-Modified` date solution (but not perfect).
 
 ### Why `semi` HTTP cache?
 Because things like `If-Modified-Since` are calculated base of `Cache-Control: max-age`
@@ -43,7 +43,7 @@ and not base to real modification date of requested entity.
 ## Configuration
 
 By default, HTTP Cache is disabled if you wan to enable it you should enable it by adding minimal configuration
-or copying file config/zf2-semi-http-cache.local.php.dist to your application configuration.
+or copying file `config/zf2-semi-http-cache.local.php.dist` to your application configuration.
 
 ```php
 <?php
