@@ -74,8 +74,8 @@ class HttpCacheListener implements ListenerAggregateInterface
             return;
         }
 
-        /** @var $headers LastModified  */
         $headers = $response->getHeaders();
+        /** @var $lastModified LastModified  */
         $lastModified = $headers->get('Last-Modified');
         if (!$lastModified instanceof LastModified) {
             $lastModified = new LastModified();
