@@ -44,12 +44,12 @@ The `max-age` is set explicit per action or global for application.
      - `304 Not Modified`
      - `Last-Modified: 2013-04-01 10:00:00 GMT` - note that last modified is old one.
 
-  3. Browser try to request resource after 60 seconds,
+  3. Browser try to request resource after 70 seconds,
      but it already has cached content so it sends request
      with header `If-Modified-Since : 2013-04-01 10:00:00 GMT` to validate if cached resource is stale.
      Application knows that browser cache is stage so it's
      returning respond with headers and with new response body:
-     - `Last-Modified: 2013-04-01 10:01:00 GMT`
+     - `Last-Modified: 2013-04-01 10:01:10 GMT` - note new last modified time.
      - `Cache-Control: max-age=60`
 
 ## Installation
