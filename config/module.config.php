@@ -1,7 +1,7 @@
 <?php
 return array(
     'zf2-semi-http-cache' => array(
-        'enabled' => true,
+        'enabled' => false,
         'useModifiedSince' => true,
         'default' => array(
             /**
@@ -13,18 +13,10 @@ return array(
              * Warning: Varnish, browsers and intermediary will parse the Age response header. If you stack multiple Varnish servers in front of each other, this means that setting s-maxage=300 will mean that the object really will be cached for only 300 seconds throughout all Varnish servers.
              * On the other hand, if your web server sends Cache-Control: max-age=300, s-maxage=3600 and you do not remove the Age response header, Varnish will send an Age-header that exceeds the max-age of the objects, which will cause browsers to not cache the content.
              */
-            's-maxage' => 3600,  // 1h
-            'max-age'  => 600,   // 10min in browser
+             's-maxage' => 3600,  // 1h
+             'max-age'  => 600,   // 10min in browser
         ),
 
         'configListener' => 'WidHttpCache\Listener\RoutesCacheConfigListener',
-    ),
-
-    'router' => array(
-        'routes' => array(
-            'application' => array(
-                'zf2-semi-http-cache' => array(),
-            ),
-        ),
     ),
 );
