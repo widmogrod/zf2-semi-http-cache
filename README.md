@@ -2,6 +2,7 @@
 ## Introduction
 
 TBD
+- what issues it solves?
 
 ## Installation
 
@@ -18,6 +19,22 @@ TBD
 
   3. Run `php composer.phar install`
   4. Open ``my/project/folder/configs/application.config.php`` and add ``'WidHttpCache'`` to your ``'modules'`` parameter.
+
+## Configuration
+
+By default, HTTP Cache is disabled if you wan to enable it you should enable it by adding minimal configuration:
+
+```php
+<?php
+return array(
+    'zf2-semi-http-cache' => array(
+        'enabled' => false,
+        'default' => array(
+             'max-age'  => 600,   // 10min in browser
+        ),
+    ),
+);
+```
 
 ## Time saving tips & tricks
 

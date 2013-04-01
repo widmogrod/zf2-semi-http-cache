@@ -16,5 +16,6 @@ return array(
              's-maxage' => 3600,  // 1h
              'max-age'  => 600,   // 10min in browser
         ),
+        'configListener' => 'WidHttpCache\Listener\RoutesCacheConfigListener',
     ),
 );
