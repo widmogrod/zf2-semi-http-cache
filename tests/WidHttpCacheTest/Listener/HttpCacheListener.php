@@ -129,4 +129,75 @@ class HttpCacheListener extends \PHPUnit_Framework_TestCase {
             ),
         );
     }
+
+    /**
+     * @dataProvider getRouteSendIsStaleProvider
+     */
+    public function testOnRouteSendIsStale($ifModifiedSinceTime, $lastModified, $maxAge) {
+        // prepare IfModifiedSince mock
+        {{
+            $dateTime = new DateTime($ifModifiedSinceTime);
+            $modifiedSince = $this->getMockBuilder('Zend\Http\Header\IfModifiedSince')->disableOriginalConstructor()->getMock();
+            $call = 0;
+            $modifiedSince->expects($this->at($call++))->method('date')->will($this->returnValue($dateTime));
+        }}
+
+        // prepare Last-Modified mock
+        {{
+            $dateTime = new DateTime($lastModified);
+            $lastModified = $this->getMockBuilder('Zend\Http\Header\LastModified')->disableOriginalConstructor()->getMock();
+            $call = 0;
+            $lastModified->expects($this->at($call++))->method('date')->will($this->returnValue($dateTime));
+        }}
+
+        // prepare request mock
+        {{
+            $request = $this->getMockBuilder('Zend\Http\Request')->disableOriginalConstructor()->getMock();
+            $call = 0;
+            $request->expects($this->at($call++))->method('getHeader')->will($this->returnValue($modifiedSince));
+        }}
+
+        // prepare headers mock
+        {{
+            $headers = $this->getMockBuilder('Zend\Http\Headers')->disableOriginalConstructor()->getMock();
+            $call = 0;
+            $headers->expects($this->at($call++))->method('get')->with($this->equalTo('Last-Modified'))->will($this->returnValue($lastModified));
+        }}
+
+        // prepare response mock
+        {{
+            $response = $this->getMockBuilder('Zend\Http\Response')->disableOriginalConstructor()->getMock();
+            $call = 0;
+            $response->expects($this->at($call++))->method('getHeaders')->will($this->returnValue($headers));
+        }}
+
+        // prepare event mock
+        {{
+            $event = $this->getMockBuilder('Zend\Mvc\MvcEvent')->disableOriginalConstructor()->getMock();
+            $call = 0;
+            $event->expects($this->at($call++))->method('getRequest')->will($this->returnValue($request));
+            $event->expects($this->at($call++))->method('getResponse')->will($this->returnValue($response));
+        }}
+
+        // prepare config mock
+        {{
+            $config = $this->getMock('WidHttpCache\Config');
+            $config->expects($this->once())->method('getUseModifiedSince')->will($this->returnValue(true));
+            $config->expects($this->once())->method('getMaxAge')->will($this->returnValue($maxAge));
+        }}
+
+        $object = new TestObject($config);
+        $resut = $object->onRoute($event);
+        $this->assertNull($resut);
+    }
+
+    public function getRouteSendIsStaleProvider() {
+        return array(
+            'equal to max age' => array(
+                '$ifModifiedSinceTime' => '2012-11-11 10:00:00',
+                '$lastModified' =>        '2012-11-11 10:00:50',
+                '$maxAge' =>               50,
+            ),
+        );
+    }
 }
