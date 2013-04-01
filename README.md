@@ -5,7 +5,19 @@ TBD
 
 ## Installation
 
-TBD
+  1. `cd my/project/directory`
+  2. Create a `composer.json` file with following content:
+
+``` json
+{
+    "require": {
+        "widmogrod/zf2-semi-http-cache": "dev-master"
+    }
+}
+```
+
+  3. Run `php composer.phar install`
+  4. Open ``my/project/folder/configs/application.config.php`` and add ``'WidHttpCache'`` to your ``'modules'`` parameter.
 
 ## Time saving tips & tricks
 
