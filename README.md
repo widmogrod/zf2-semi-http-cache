@@ -1,4 +1,4 @@
-# Semi HTTP Cache for Zend Framework 2.
+# Semi HTTP Cache for Zend Framework 2. [![Build Status](https://travis-ci.org/widmogrod/zf2-semi-http-cache.png?branch=master)](https://travis-ci.org/widmogrod/zf2-semi-http-cache)
 ## Introduction
 
 ## Time saving tips & tricks
