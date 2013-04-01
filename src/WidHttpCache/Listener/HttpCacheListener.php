@@ -91,6 +91,7 @@ class HttpCacheListener implements ListenerAggregateInterface
 
         if ($age < $maxAge) {
             // Nop, you have quire fresh information
+            $lastModified->setDate($modifiedSince->date());
             $response->setStatusCode($response::STATUS_CODE_304);
             $response->setContent(null);
             return $response;

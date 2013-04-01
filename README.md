@@ -22,7 +22,35 @@ TBD
 ### Why `semi` HTTP cache?
 Because things like `If-Modified-Since` are calculated base of `Cache-Control: max-age`
 and not base to real modification date of requested entity.
+The `max-age` is set explicit per action or global for application.
 
+### Simple workflow ###
+
+  1. Browser request resource `/data.json`.
+     In application max-age is set for this resource for 60 seconds.
+     Application return response with headers:
+     - `Last-Modified: 2013-04-01 10:00:00 GMT`
+     - `Cache-Control: max-age=60`
+
+  2. a) Browser try to request resource `/data.json` after 10 seconds,
+     but it already has cached content so it return data from browser cache.
+     No request is made.
+
+  2. b) Sometimes may happen that browser try to request resource `/data.json` after 10 seconds,
+     and it want to validate if cached resource is stale.
+     So it sends request wth header `If-Modified-Since : 2013-04-01 10:00:00 GMT`.
+     But application knows that valid lifetime for this resource is 60 seconds
+     so application return response without body but with headers:
+     - `304 Not Modified`
+     - `Last-Modified: 2013-04-01 10:00:00 GMT` - note that last modified is old one.
+
+  3. Browser try to request resource after 60 seconds,
+     but it already has cached content so it sends request
+     with header `If-Modified-Since : 2013-04-01 10:00:00 GMT` to validate if cached resource is stale.
+     Application knows that browser cache is stage so it's
+     returning respond with headers and with new response body:
+     - `Last-Modified: 2013-04-01 10:01:00 GMT`
+     - `Cache-Control: max-age=60`
 
 ## Installation
 
