@@ -23,6 +23,9 @@ TBD
 Because things like `If-Modified-Since` are calculated base of `Cache-Control: max-age`
 and not base to real modification date of requested entity.
 The `max-age` is set explicit per action or global for application.
+It's big simplification, but as solution out of the box is quite effective.
+If you looking for something more bespoke I recommend The Symfony framework approach:
+http://symfony.com/doc/2.0/book/http_cache.html
 
 ### Simple workflow ###
 
