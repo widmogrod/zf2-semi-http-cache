@@ -13,6 +13,33 @@ class Config
     protected $mustRevalidate = true;
     protected $configListener = self::CONFIG_LISTENER;
 
+    public function __construct(array $options = null)
+    {
+        if (null !== $options) {
+            $this->setOptions($options);
+        }
+    }
+
+    public function setOptions(array $options)
+    {
+        foreach ($options as $key => $value) {
+            switch ($key) {
+                case 'enabled':
+                    $this->setEnabled($value);
+                    break;
+                case 'useModifiedSince':
+                    $this->setUseModifiedSince($value);
+                    break;
+                case 'configListener':
+                    $this->setConfigListener($value);
+                    break;
+                case 'default':
+                    $this->merge($value);
+                    break;
+            }
+        }
+    }
+
     public function setConfigListener($configListener)
     {
         $this->configListener = $configListener;

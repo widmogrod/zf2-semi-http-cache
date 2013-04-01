@@ -46,10 +46,12 @@ class Module implements BootstrapListenerInterface, ServiceProviderInterface
     public function getServiceConfig()
     {
         return array(
-            'invokables' => array(
-                'WidHttpCache\Config' => 'WidHttpCache\Config',
-            ),
             'factories' => array(
+                'WidHttpCache\Config' => function(ServiceManager $manager) {
+                    $config = $manager->get('Config');
+                    $config = isset($config[Config::CONFIG_NAMESPACE]) ? $config[Config::CONFIG_NAMESPACE] : array();
+                    return new Config($config);
+                },
                 'WidHttpCache\Listener\HttpCacheListener' => function(ServiceManager $manager) {
                     return new Listener\HttpCacheListener($manager->get('WidHttpCache\Config'));
                 },
