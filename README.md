@@ -10,13 +10,20 @@ TBD
 ### Why semi http cache and not full flagged?
 
 ### What issues it solves?
-- Wrong Last-Modified date when your application is running on apache.
-  This date in Apache is index.php timestamp which is not accurate and can couse that browser will not cache response.
+- Wrong Last-Modified date when your application is running on Apache.
+  This date in taken from index.php modification date which is not accurate
+  and can cause that browser won't cache response.
 
 ### What benefits it brings?
 - handling If-Modified-Since & 304 Not Modified which:
   - reducing bandwidth if not modified the response is only 304 header.
   - speed up response time by omitting dispatch event if browser content is not stale.
+- providing more accurate Last-Modified date solution
+- providing simple but flexible Cache-Control header control.
+
+### Why ``semi`` HTTP cache?
+Because things like Last-Modified date and If-Modified-Since are relative to max-age set per action.
+
 
 ## Installation
 
@@ -36,7 +43,8 @@ TBD
 
 ## Configuration
 
-By default, HTTP Cache is disabled if you wan to enable it you should enable it by adding minimal configuration:
+By default, HTTP Cache is disabled if you wan to enable it you should enable it by adding minimal configuration
+or copying file config/zf2-semi-http-cache.local.php.dist to your application configuration.
 
 ```php
 <?php
