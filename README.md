@@ -5,8 +5,6 @@ This module is still in development phase.
 
 ## Introduction
 
-TBD
-
 ### What issues it solves?
 - Wrong `Last-Modified` date when your application is running on Apache.
   This date in taken from index.php modification date which is not accurate
@@ -74,14 +72,19 @@ http://symfony.com/doc/2.0/book/http_cache.html
 
 ## Configuration
 
-By default, HTTP Cache is disabled if you wan to enable it you should enable it by adding minimal configuration
-or copying file `config/zf2-semi-http-cache.local.php.dist` to your application configuration.
+By default, HTTP Cache is disabled if you wan to enable it you should enable it by copying configuration:
+
+```sh
+cp vendor/widmogrod/zf2-semi-http-cache/config/zf2-semi-http-cache.local.php config/autoload/
+```
+
+Or, by adding this config entry to your local.php configuration file:
 
 ```php
 <?php
 return array(
     'zf2-semi-http-cache' => array(
-        'enabled' => false,
+        'enabled' => true,
         'default' => array(
              'max-age'  => 600,   // 10min in browser
         ),
