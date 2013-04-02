@@ -13,6 +13,7 @@ TBD
   and can cause that browser won't cache response.
 
 ### What benefits it brings?
+Enabling browser cache workflow.
 - Handling `If-Modified-Since` which:
   - Reducing bandwidth. If browser has valid cached data then only 304 header is send.
   - Speed up response time, by omitting dispatch event if browser cache is not stale.
@@ -87,6 +88,11 @@ return array(
     ),
 );
 ```
+
+## Todo
+
+ 1. create simple UML diagram describing workflow
+ 2. example with Varnish cache.
 
 ## Time saving tips & tricks
 
