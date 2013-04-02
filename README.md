@@ -72,13 +72,13 @@ http://symfony.com/doc/2.0/book/http_cache.html
 
 ## Configuration
 
-By default, HTTP Cache is disabled if you wan to enable it you should enable it by copying configuration:
+By default, HTTP Cache is disabled if you wan to enable it you should copy configuration file:
 
 ```sh
 cp vendor/widmogrod/zf2-semi-http-cache/config/zf2-semi-http-cache.local.php config/autoload/
 ```
 
-Or, by adding this config entry to your local.php configuration file:
+Or, add following config entry to your local.php configuration file:
 
 ```php
 <?php
