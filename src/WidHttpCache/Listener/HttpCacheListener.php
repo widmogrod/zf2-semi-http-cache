@@ -63,6 +63,9 @@ class HttpCacheListener implements ListenerAggregateInterface
         $request = $e->getRequest();
         /** @var $response Response */
         $response = $e->getResponse();
+        if (!$response instanceof Response) {
+            return;
+        }
 
         if (!$this->config->getUseModifiedSince()) {
             return;
@@ -102,6 +105,9 @@ class HttpCacheListener implements ListenerAggregateInterface
     {
         /** @var $response Response */
         $response = $e->getResponse();
+        if (!$response instanceof Response) {
+            return;
+        }
 
         $headers = $response->getHeaders();
         /** @var $lastModified LastModified  */
